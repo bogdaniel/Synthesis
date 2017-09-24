@@ -1,0 +1,21 @@
+version: "3.1"
+
+services:
+  npm:
+    build:
+      context: docker/npm
+      dockerfile: Dockerfile
+    working_dir: /src
+    tty: true
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    volumes:
+      - .:/src
+      - node_modules:/src/node_modules # yarn SMB fix
+      - yarn_cache:/root/.cache # yarn SMB fix
+volumes:
+  node_modules: {} # yarn SMB fix
+  yarn_cache: {} # yarn SMB fix
+
+
