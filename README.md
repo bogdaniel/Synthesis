@@ -39,5 +39,13 @@ A starter Kit is an Automated Checklist
 - Automated Deployment
 - Working example app
 
+Why should you use us ?
+=======================
+
+ - Reduce decision fatigue
+ - Right thing becomes automated
+ - Codifies lessons learned
+ -  Rapid feedback
+ - Automated checklist
 
 
