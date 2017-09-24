@@ -6,6 +6,15 @@
   "repository": "https://github.com/bogdaniel/Synthesis",
   "author": "Bogdan Olteanu",
   "license": "MIT",
+  "scripts": {
+    "prestart": "node build_scripts/development-server-start-message.js",
+    "start": "npm-run-all --parallel security-check open-development-server",
+    "start:development:server": "node build_scripts/development-server.js",
+    "start:production:server": "",
+    "security-check": "nsp check",
+    "localtunnel": "lt --port 3001",
+    "share:development": "npm-run-all --parallel start:development:server localtunnel"
+  },
   "dependencies": {
     "whatwg-fetch": "^2.0.3"
   },
