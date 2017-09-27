@@ -3,13 +3,13 @@ import webpack from 'webpack';
 
 export default {
   entry: [
-    path.resolve(__dirname, 'src/index')
+    path.resolve(__dirname, 'src/index'),
   ],
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'src'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'src'),
@@ -17,7 +17,7 @@ export default {
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].map',
-    })
+    }),
   ],
   module: {
     loaders: [
@@ -29,9 +29,9 @@ export default {
             options: {
               minimize: true,
               removeComments: true,
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -39,8 +39,8 @@ export default {
           {
             loader: 'style-loader',
             options: {
-              sourceMap: true
-            }
+              sourceMap: true,
+            },
           },
           {
             loader: 'css-loader',
@@ -49,18 +49,18 @@ export default {
               minimize: true,
               sourceMap: true,
             },
-          }
-        ]
+          },
+        ],
       },
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: [
           {
-            loader: 'babel-loader'
-          }
-        ]
-      }
-    ]
-  }
-}
+            loader: 'babel-loader',
+          },
+        ],
+      },
+    ],
+  },
+};

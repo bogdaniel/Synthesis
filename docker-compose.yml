@@ -7,6 +7,9 @@ services:
       dockerfile: Dockerfile
     working_dir: /src
     tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=600
     ports:
       - "3000:3000"
       - "3001:3001"
