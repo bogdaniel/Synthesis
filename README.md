@@ -1,4 +1,8 @@
 # Synthesis
+Travis CI Build Status: 
+
+[![Build Status](https://travis-ci.org/bogdaniel/Synthesis.svg?branch=master)](https://travis-ci.org/bogdaniel/Synthesis)
+
 
 Part I
 ------
