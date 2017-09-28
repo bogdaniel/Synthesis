@@ -4,8 +4,22 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <script src="bundle.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch"></script>
+
 </head>
 <body>
-<h1>Hello World</h1>
+<h1>Users</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Actions</th>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody id="users"></tbody>
+</table>
 </body>
 </html>
