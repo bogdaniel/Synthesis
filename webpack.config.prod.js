@@ -7,7 +7,7 @@ export default {
   ],
   target: 'web',
   output: {
-    path: path.resolve(__dirname, 'src'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -15,6 +15,9 @@ export default {
     contentBase: path.resolve(__dirname, 'src'),
   },
   plugins: [
+    // Eliminate duplicate packages when generating bundle
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].map',
     }),

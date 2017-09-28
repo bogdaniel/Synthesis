@@ -46,7 +46,7 @@ export default {
             loader: 'css-loader',
             options: {
               modules: true,
-              minimize: true,
+              minimize: false,
               sourceMap: true,
             },
           },
