@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import webpack from 'webpack';
-import webpackConfig from 'webpack.config.prod';
 import chalk from 'chalk';
+import webpackConfig from '../webpack.config.prod';
 
 process.env.NODE_ENV = 'production';
 const log = console.log;
@@ -12,6 +12,7 @@ webpack(webpackConfig).run((err, stats) => {
   if (err) {
     // So a fatal error occurred Stop here.
     log(chalk.red(err));
+
     return 1;
   }
 
@@ -33,5 +34,4 @@ webpack(webpackConfig).run((err, stats) => {
 
 
   return 0;
-
 });

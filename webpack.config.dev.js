@@ -1,6 +1,8 @@
 import path from 'path';
 import webpack from 'webpack';
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 export default {
   entry: [
     path.resolve(__dirname, 'src/index'),
@@ -15,6 +17,11 @@ export default {
     contentBase: path.resolve(__dirname, 'src'),
   },
   plugins: [
+    // Create an HTML file that includes reference to bundled JS.
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true,
+    }),
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].map',
     }),

@@ -12,7 +12,12 @@ function onError(error) {
 }
 
 function get(url) {
-  return fetch(baseUrl + url).then(onSuccess, onError);
+  return fetch(baseUrl + url, {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  }).then(onSuccess, onError);
 }
 
 function del(url) {

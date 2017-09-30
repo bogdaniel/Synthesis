@@ -1,23 +1,55 @@
 import path from 'path';
 import webpack from 'webpack';
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 export default {
-  entry: [
-    path.resolve(__dirname, 'src/index'),
-  ],
+  devtool: 'source-map',
+  entry: {
+    vendor: path.resolve(__dirname, 'src/vendor'),
+    main: path.resolve(__dirname, 'src/index'),
+  },
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].[chunkhash].js',
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'src'),
   },
   plugins: [
-    // Eliminate duplicate packages when generating bundle
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    new ExtractTextPlugin('styles.css'),
+    // Hash the files using MD5 so that their names change when the content changes.
+    new WebpackMd5Hash(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+    }),
+    // Create an HTML file that includes reference to bundled JS.
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      minify: {
+        collapseWhitespace: true,
+        html5: true,
+        minifyCSS: true,
+        minifyJS: true,
+        minifyURLs: true,
+        removeComments: true,
+        removeEmptyElements: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        removeRedundantAttributes: true,
+        sortClassName: true,
+        useShortDoctype: true,
+        keepClosingSlash: true,
+
+      },
+      inject: true,
+    }),
+    // Minify JS
+    new webpack.optimize.UglifyJsPlugin('[name].[chunkhash].css'),
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].map',
     }),
@@ -38,22 +70,19 @@ export default {
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              minimize: true,
-              sourceMap: true,
-            },
-          },
-        ],
+        use: ExtractTextPlugin.extract({
+          allChunks: true,
+          fallback: 'style-loader',
+          use: 'css-loader',
+        }),
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          //resolve-url-loader may be chained before sass-loader if necessary
+          use: ['css-loader', 'sass-loader']
+        })
       },
       {
         test: /\.js$/,
