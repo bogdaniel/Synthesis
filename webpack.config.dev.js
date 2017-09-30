@@ -4,6 +4,7 @@ import webpack from 'webpack';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 export default {
+  devtool: 'inline-source-map',
   entry: [
     path.resolve(__dirname, 'src/index'),
   ],
@@ -54,6 +55,56 @@ export default {
             options: {
               modules: true,
               minimize: false,
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              minimize: false,
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              minimize: false,
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
               sourceMap: true,
             },
           },
