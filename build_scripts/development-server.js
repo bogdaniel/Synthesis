@@ -1,15 +1,15 @@
-import express from 'express';
-import path from 'path';
-import open from 'open';
-import webpack from 'webpack';
-import config from '../webpack.config.dev';
+const express = require('express');
+const path = require('path');
+const open = require('open');
+const webpack = require('webpack');
+const config = require('../webpack.config.dev');
 
 process.env.NODE_ENV = 'development';
 
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
-const log = console.log;
+const { log } = console;
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,

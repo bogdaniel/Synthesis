@@ -1,10 +1,11 @@
-import path from 'path';
-import webpack from 'webpack';
+const path = require('path');
+const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-export default {
+module.exports = {
   devtool: 'inline-source-map',
+  mode: 'development',
   entry: [
     path.resolve(__dirname, 'src/index'),
   ],
@@ -28,7 +29,7 @@ export default {
     }),
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.html$/,
         use: [
@@ -52,11 +53,6 @@ export default {
           },
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-              minimize: false,
-              sourceMap: true,
-            },
           },
         ],
       },

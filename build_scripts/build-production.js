@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
-import webpack from 'webpack';
-import chalk from 'chalk';
-import webpackConfig from '../webpack.config.prod';
+const webpack = require('webpack');
+const chalk = require('chalk');
+
+const webpackConfig = require('../webpack.config.prod');
 
 process.env.NODE_ENV = 'production';
-const log = console.log;
+const { log } = console;
 
 log(chalk.blue('Generating minified bundle for production. This will take a moment...'));
 

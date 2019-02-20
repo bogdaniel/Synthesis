@@ -1,11 +1,12 @@
-import express from 'express';
-import path from 'path';
-import open from 'open';
-import compression from 'compression';
+const express = require('express');
+const path = require('path');
+const open = require('open');
+const compression = require('compression');
+
 
 const port = 3000;
 const app = express();
-const log = console.log;
+const { log } = console;
 
 app.use(compression());
 app.use(express.static('dist'));

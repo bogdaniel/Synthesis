@@ -2,11 +2,13 @@ import path from 'path';
 import webpack from 'webpack';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-export default {
+module.exports = {
   devtool: 'source-map',
+  mode: 'production',
   entry: {
     vendor: path.resolve(__dirname, 'src/vendor'),
     main: path.resolve(__dirname, 'src/index'),
@@ -27,7 +29,7 @@ export default {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
     }),
-    // Create an HTML file that includes reference to bundled JS.
+    // Create an options file that includes reference to bundled JS.
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       minify: {
@@ -55,7 +57,7 @@ export default {
     }),
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.html$/,
         use: [
@@ -70,26 +72,26 @@ export default {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
+        use: MiniCssExtractPlugin.loader({
           allChunks: true,
           fallback: 'style-loader',
-          use: 'css-loader',
+          options: 'css-loader',
         }),
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
+        use: MiniCssExtractPlugin.loader({
           fallback: 'style-loader',
           // resolve-url-loader may be chained before sass-loader if necessary
-          use: ['css-loader', 'sass-loader'],
+          options: ['css-loader', 'sass-loader'],
         }),
       },
       {
         test: /\.less/,
-        use: ExtractTextPlugin.extract({
+        use: MiniCssExtractPlugin.loader({
           fallback: 'style-loader',
           // resolve-url-loader may be chained before sass-loader if necessary
-          use: ['css-loader', 'less-loader'],
+          options: ['css-loader', 'less-loader'],
         }),
       },
       {

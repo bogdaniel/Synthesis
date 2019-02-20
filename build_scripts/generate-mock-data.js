@@ -5,15 +5,15 @@
  */
 
 /* eslint-disable no-console */
+const jsf = require('json-schema-faker');
+const chalk = require('chalk');
+const fs = require('fs');
 
-import jsf from 'json-schema-faker';
-import fs from 'fs';
-import chalk from 'chalk';
-import { schema } from './mock-data-schema';
-
+// import {schema} from './mock-data-schema';
+const schema = require('./mock-data-schema');
 
 const json = JSON.stringify(jsf(schema));
-const log = console.log;
+const { log } = console;
 
 fs.writeFile('./src/api/db.json', json, (err) => {
   if (err) {
